@@ -1,0 +1,22 @@
+{
+    "type": "object",
+    "properties": {
+        "requestBody": {
+            "type": "string",
+            "description": "The possible status values for lots.\n\nACTIVE means that the lot is actively used by the organization\nand is made available to the end user for selection in the UI.\n\nDISCONTINUED means that the lot is no longer ACTIVE and not made\navailable for selection by the end user.\n",
+            "readOnly": true,
+            "enum": [
+                "ACTIVE",
+                "DISCONTINUED"
+            ]
+        },
+        "org_id": {
+            "required": true,
+            "type": "string"
+        },
+        "lot_id": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

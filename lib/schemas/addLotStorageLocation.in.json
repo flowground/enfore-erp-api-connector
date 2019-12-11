@@ -1,0 +1,27 @@
+{
+    "type": "object",
+    "properties": {
+        "requestBody": {
+            "required": [
+                "storage_location"
+            ],
+            "type": "object",
+            "properties": {
+                "storage_location": {
+                    "maxLength": 256,
+                    "type": "string",
+                    "description": "The ID of the storage location.\n"
+                }
+            },
+            "description": "Represents the information about a specific lot at a specific storage location\n"
+        },
+        "org_id": {
+            "required": true,
+            "type": "string"
+        },
+        "lot_id": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

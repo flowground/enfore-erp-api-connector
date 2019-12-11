@@ -1,0 +1,23 @@
+{
+    "type": "object",
+    "properties": {
+        "from": {
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+        },
+        "to": {
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+        },
+        "contact_id": {
+            "required": true,
+            "type": "string"
+        },
+        "org_id": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

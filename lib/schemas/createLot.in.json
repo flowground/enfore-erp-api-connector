@@ -1,0 +1,67 @@
+{
+    "type": "object",
+    "properties": {
+        "requestBody": {
+            "required": [
+                "id",
+                "number",
+                "product",
+                "status"
+            ],
+            "type": "object",
+            "properties": {
+                "id": {
+                    "maxLength": 256,
+                    "type": "string",
+                    "description": "The technical identifier of the lot. Assigned by the enfore platform on creation of the\nproduct and not changeable afterwards.\n",
+                    "readOnly": true
+                },
+                "product": {
+                    "maxLength": 256,
+                    "type": "string",
+                    "description": "The ID of the product, the lot belongs to.\n",
+                    "readOnly": true
+                },
+                "number": {
+                    "maxLength": 256,
+                    "type": "string",
+                    "description": "The lot number.\n\nThis is an identifier and often consists of alphanmeric characters.\nThe name number is chosen to align with the domain-specific language.\n",
+                    "readOnly": true
+                },
+                "status": {
+                    "type": "string",
+                    "description": "The possible status values for lots.\n\nACTIVE means that the lot is actively used by the organization\nand is made available to the end user for selection in the UI.\n\nDISCONTINUED means that the lot is no longer ACTIVE and not made\navailable for selection by the end user.\n",
+                    "readOnly": true,
+                    "enum": [
+                        "ACTIVE",
+                        "DISCONTINUED"
+                    ]
+                },
+                "external_reference": {
+                    "maxLength": 256,
+                    "type": "string",
+                    "description": "An optional external reference for the lot.\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "An  optional description for the lot.\n"
+                },
+                "production_date": {
+                    "type": "string",
+                    "description": "Date when the units of the lot were produced or will be produced.\n",
+                    "format": "date"
+                },
+                "expiration_date": {
+                    "type": "string",
+                    "description": "Date when the units of the lot will or did expire.\n",
+                    "format": "date"
+                }
+            },
+            "description": "Represents a lot of a specific product.\n"
+        },
+        "org_id": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

@@ -1,0 +1,667 @@
+{
+    "title": "enfore ERP API",
+    "description": "enfore API for managing products, invoices and credit memos\n",
+    "docsUrl": "",
+    "url": "http://localhost",
+    "envVars": {},
+    "credentials": {
+        "fields": {
+            "server": {
+                "label": "Server",
+                "viewClass": "SelectView",
+                "model": [
+                    "https://external-stable.dev.enfore.de/erp - Stable",
+                    "https://external.apis.enfore.com/erp - Production",
+                    "--- Custom URL"
+                ],
+                "required": true
+            },
+            "otherServer": {
+                "label": "Custom Server URL",
+                "viewClass": "TextFieldView"
+            }
+        }
+    },
+    "triggers": {
+        "startFlow": {
+            "main": "./lib/triggers/startFlow.js",
+            "type": "polling",
+            "title": "Start Flow",
+            "fields": {}
+        }
+    },
+    "actions": {
+        "getProducts": {
+            "main": "./lib/actions/getProducts.js",
+            "title": "Load the list of all products",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getProducts.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "createProduct": {
+            "main": "./lib/actions/createProduct.js",
+            "title": "Add a new product to the organisation",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/createProduct.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getIdMappings": {
+            "main": "./lib/actions/getIdMappings.js",
+            "title": "Get the mappings of internal to external IDs for products.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getIdMappings.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "upsertProductExtIdMappings": {
+            "main": "./lib/actions/upsertProductExtIdMappings.js",
+            "title": "Upsert the mappings from internal to external IDs for products",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/upsertProductExtIdMappings.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getIdMapping": {
+            "main": "./lib/actions/getIdMapping.js",
+            "title": "Get the mapping of internal to external IDs for products.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getIdMapping.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getProduct": {
+            "main": "./lib/actions/getProduct.js",
+            "title": "Load a product by its identifier",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getProduct.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "updateProduct": {
+            "main": "./lib/actions/updateProduct.js",
+            "title": "Full update of a product",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/updateProduct.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "deleteProduct": {
+            "main": "./lib/actions/deleteProduct.js",
+            "title": "Delete a product by its identifier",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/deleteProduct.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getSalesChannels": {
+            "main": "./lib/actions/getSalesChannels.js",
+            "title": "Load all sales channel-specific information of a product identified by its ID",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getSalesChannels.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "createSalesChannelById": {
+            "main": "./lib/actions/createSalesChannelById.js",
+            "title": "Create a product's relation to a sales channel",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/createSalesChannelById.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getSalesChannelById": {
+            "main": "./lib/actions/getSalesChannelById.js",
+            "title": "Load product sales channel information by ID",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getSalesChannelById.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "updateSalesChannelById": {
+            "main": "./lib/actions/updateSalesChannelById.js",
+            "title": "Update a product's relation to a sales channel",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/updateSalesChannelById.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "removeSalesChannel": {
+            "main": "./lib/actions/removeSalesChannel.js",
+            "title": "Remove a product from a sales channel.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/removeSalesChannel.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getProductTags": {
+            "main": "./lib/actions/getProductTags.js",
+            "title": "Load all tags of a product identified by its ID",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getProductTags.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "tagProduct": {
+            "main": "./lib/actions/tagProduct.js",
+            "title": "Add a tag to a product identified by its ID. If the tag is not already in the system, it will be created.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/tagProduct.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "untagProduct": {
+            "main": "./lib/actions/untagProduct.js",
+            "title": "Delete a tag with given tag-id from a product identified by its product-id",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/untagProduct.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getProductByExternalId": {
+            "main": "./lib/actions/getProductByExternalId.js",
+            "title": "Load a product by its external ID",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getProductByExternalId.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "updateProductByExternalId": {
+            "main": "./lib/actions/updateProductByExternalId.js",
+            "title": "Update or create a product addressed by its external ID",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/updateProductByExternalId.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getProductImages": {
+            "main": "./lib/actions/getProductImages.js",
+            "title": "Returns IDs of all the images that are attached to this product",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getProductImages.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "addProductImage": {
+            "main": "./lib/actions/addProductImage.js",
+            "title": "Add a new image to the product.",
+            "description": "This method appends a new image to the list of images that are attached\nto a given product.\nNote that every time you add an image, it is appended to the front of the list such that\nit becomes the default image.\nNote that at the moment only JPEG and PNG images are supported. A request size restriction may also be imposed by the gateway. Typically, the gateway limits requests over 12 Megabytes.\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/addProductImage.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "removeProductImage": {
+            "main": "./lib/actions/removeProductImage.js",
+            "title": "Delete an image by it's identifier on a given product",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/removeProductImage.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getLots": {
+            "main": "./lib/actions/getLots.js",
+            "title": "Query lots",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getLots.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "createLot": {
+            "main": "./lib/actions/createLot.js",
+            "title": "Add a new lot",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/createLot.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getLot": {
+            "main": "./lib/actions/getLot.js",
+            "title": "Load a lot by its identifier",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getLot.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "updateLotStatus": {
+            "main": "./lib/actions/updateLotStatus.js",
+            "title": "Update the status of a lot",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/updateLotStatus.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getLotStorageLocations": {
+            "main": "./lib/actions/getLotStorageLocations.js",
+            "title": "Load storage location-specific information of a lot identified by its ID",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getLotStorageLocations.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "addLotStorageLocation": {
+            "main": "./lib/actions/addLotStorageLocation.js",
+            "title": "Create a lot's relation to a storage location",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/addLotStorageLocation.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "deleteLotStorageLocation": {
+            "main": "./lib/actions/deleteLotStorageLocation.js",
+            "title": "Remove the relation between a lot and a storage location.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/deleteLotStorageLocation.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getSalesCategories": {
+            "main": "./lib/actions/getSalesCategories.js",
+            "title": "Get a list with all sales categories sorted by their names.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getSalesCategories.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "createSalesCategory": {
+            "main": "./lib/actions/createSalesCategory.js",
+            "title": "Create a new sales category",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/createSalesCategory.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getInvoices": {
+            "main": "./lib/actions/getInvoices.js",
+            "title": "Returns invoices",
+            "description": "Returns invoices for the specified interval, sorted in ascending order by transaction date and time.\n<br><br>\n<strong>\nSince our platform was built as a distributed system, we are subject to the laws of the \"Eventual consistency\" model. This means that time periods close to the present may be unstable and could contain new items if the same time interval is queried again.\n<br><br>\nWe therefore recommend that intervals that are close to the present time should be re-requested and verified at a later time.\n</strong>\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getInvoices.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getInvoiceEventsSubscriptions": {
+            "main": "./lib/actions/getInvoiceEventsSubscriptions.js",
+            "title": "Get a list of registered consumers for invoice events.",
+            "description": "Retrieve all currently active event subscriptions.\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getInvoiceEventsSubscriptions.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "subscribeInvoiceEvents": {
+            "main": "./lib/actions/subscribeInvoiceEvents.js",
+            "title": "Register an event consumer with the API.",
+            "description": "If the callback URL is already registered, we return the original subscription ID.\nWe will continue attempting to send new items to registered subscriptions until they are deleted.\nIn case we cannot reach the endpoint, we will apply an exponential backoff.\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/subscribeInvoiceEvents.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "unsubscribeInvoiceEvents": {
+            "main": "./lib/actions/unsubscribeInvoiceEvents.js",
+            "title": "Delete a subscription for invoices",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/unsubscribeInvoiceEvents.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getCreditDemos": {
+            "main": "./lib/actions/getCreditDemos.js",
+            "title": "Returns credit-memos",
+            "description": "Returns credit memos for the specified interval, sorted in ascending order by transaction date and time.\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getCreditDemos.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getCreditMemoEventsSubscriptions": {
+            "main": "./lib/actions/getCreditMemoEventsSubscriptions.js",
+            "title": "Get a list of registered consumers for credit memo events.",
+            "description": "Retrieve all currently active event subscriptions.\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getCreditMemoEventsSubscriptions.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "subscribeCreditMemoEvents": {
+            "main": "./lib/actions/subscribeCreditMemoEvents.js",
+            "title": "Register an event consumer with the API.",
+            "description": "If the callback URL is already registered, we return the original subscription ID.\nWe will continue attempting to send new items to registered subscriptions until they are deleted.\nIn case we cannot reach the endpoint, we will apply an exponential backoff.\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/subscribeCreditMemoEvents.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "unsubscribeCreditMemoEvents": {
+            "main": "./lib/actions/unsubscribeCreditMemoEvents.js",
+            "title": "Delete a subscription for credit memos",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/unsubscribeCreditMemoEvents.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "exportDatevEmail": {
+            "main": "./lib/actions/exportDatevEmail.js",
+            "title": "Export account information in DATEV Format",
+            "description": "Returns the exported content in DATEV format to the given contact's email address\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/exportDatevEmail.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}

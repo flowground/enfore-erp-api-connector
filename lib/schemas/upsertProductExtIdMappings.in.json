@@ -1,0 +1,40 @@
+{
+    "type": "object",
+    "properties": {
+        "requestBody": {
+            "required": [
+                "items"
+            ],
+            "type": "object",
+            "properties": {
+                "items": {
+                    "type": "array",
+                    "description": "The mapping of internal to external ID",
+                    "items": {
+                        "required": [
+                            "external",
+                            "internal"
+                        ],
+                        "type": "object",
+                        "properties": {
+                            "internal": {
+                                "maxLength": 256,
+                                "type": "string",
+                                "description": "Internal ID"
+                            },
+                            "external": {
+                                "maxLength": 256,
+                                "type": "string",
+                                "description": "External ID"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "org_id": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

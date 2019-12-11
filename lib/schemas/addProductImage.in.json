@@ -1,0 +1,26 @@
+{
+    "type": "object",
+    "properties": {
+        "requestBody": {
+            "required": [
+                "data"
+            ],
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "string",
+                    "description": "A Base64 encoded string containing the image binary"
+                }
+            },
+            "description": "A container for the requests for adding an image to a product"
+        },
+        "org_id": {
+            "required": true,
+            "type": "string"
+        },
+        "product_id": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

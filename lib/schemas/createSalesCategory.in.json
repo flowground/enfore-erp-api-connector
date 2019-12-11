@@ -1,0 +1,47 @@
+{
+    "type": "object",
+    "properties": {
+        "requestBody": {
+            "required": [
+                "id",
+                "name"
+            ],
+            "type": "object",
+            "properties": {
+                "id": {
+                    "maxLength": 256,
+                    "type": "string",
+                    "description": "The technical identifier of the sales category. Assigned by the enfore platform.\n",
+                    "readOnly": true
+                },
+                "external_id": {
+                    "type": "string",
+                    "description": "The ID used by an external partner or the end user"
+                },
+                "icon": {
+                    "type": "string",
+                    "description": "The identifier of the icon to use for visualizing the category in contexts where the UI requires/supports icons.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Category name.\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "A description of the category.\n"
+                },
+                "is_active": {
+                    "type": "boolean",
+                    "description": "Flag that shows if the category is active or deleted\n",
+                    "readOnly": true,
+                    "default": true
+                }
+            },
+            "description": "Represents a category that a product can be part of.\n"
+        },
+        "org_id": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

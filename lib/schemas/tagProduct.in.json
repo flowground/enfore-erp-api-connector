@@ -1,0 +1,34 @@
+{
+    "type": "object",
+    "properties": {
+        "requestBody": {
+            "required": [
+                "id",
+                "name"
+            ],
+            "type": "object",
+            "properties": {
+                "id": {
+                    "maxLength": 256,
+                    "type": "string",
+                    "description": "The technical identifier of the product. Assigned by the enfore platform on creation of the\ntag and not changeable afterwards.\n",
+                    "readOnly": true
+                },
+                "name": {
+                    "maxLength": 256,
+                    "type": "string",
+                    "description": "Tag name as shown in the UI."
+                }
+            },
+            "description": "Tags are maintained by the enfore plattform. They can be identified by name or ID. Names are case sensitive.\n"
+        },
+        "org_id": {
+            "required": true,
+            "type": "string"
+        },
+        "product_id": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

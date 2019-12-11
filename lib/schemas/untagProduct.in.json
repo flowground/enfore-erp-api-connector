@@ -1,0 +1,17 @@
+{
+    "type": "object",
+    "properties": {
+        "org_id": {
+            "required": true,
+            "type": "string"
+        },
+        "product_id": {
+            "required": true,
+            "type": "string"
+        },
+        "tag_id": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

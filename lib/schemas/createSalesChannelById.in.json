@@ -1,0 +1,187 @@
+{
+    "type": "object",
+    "properties": {
+        "requestBody": {
+            "required": [
+                "id",
+                "sales_channel_id"
+            ],
+            "type": "object",
+            "properties": {
+                "id": {
+                    "maxLength": 256,
+                    "type": "string",
+                    "description": "The technical identifier of the product's sales channel information. Assigned by the enfore platform.\n",
+                    "readOnly": true
+                },
+                "sales_channel_id": {
+                    "maxLength": 256,
+                    "type": "string",
+                    "description": "The technical identifier of the sales channel.\n"
+                },
+                "sales_price_and_quantity": {
+                    "required": [
+                        "price",
+                        "price_is_gross",
+                        "quantity"
+                    ],
+                    "type": "object",
+                    "properties": {
+                        "price": {
+                            "required": [
+                                "unit",
+                                "value"
+                            ],
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "multipleOf": 0.000001,
+                                    "type": "number",
+                                    "description": "The numerical value of the Money.\nMust be in the range of -9,000,000,000,000 to 9,000,000,000,000 and may use up to 6 decimal digits.\n"
+                                },
+                                "unit": {
+                                    "type": "string",
+                                    "description": "Represents a currency. Uses the ISO 4217 codes.",
+                                    "enum": [
+                                        "AUD",
+                                        "BRL",
+                                        "CAD",
+                                        "CHF",
+                                        "CNY",
+                                        "DKK",
+                                        "EUR",
+                                        "GBP",
+                                        "HKD",
+                                        "IDR",
+                                        "INR",
+                                        "JPY",
+                                        "KRW",
+                                        "MXN",
+                                        "MYR",
+                                        "NOK",
+                                        "NZD",
+                                        "PHP",
+                                        "RUB",
+                                        "SEK",
+                                        "SGD",
+                                        "TRY",
+                                        "TWD",
+                                        "USD",
+                                        "ZAR"
+                                    ]
+                                }
+                            },
+                            "description": "A Money represents a monetary value (i.e., a currency and an amount), for example \"120 EUR\" or \"2,500.75 USD\"."
+                        },
+                        "price_is_gross": {
+                            "type": "boolean",
+                            "description": "Flag indicating whether the price is gross (true) or net (false)"
+                        },
+                        "quantity": {
+                            "required": [
+                                "unit",
+                                "value"
+                            ],
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "multipleOf": 0.000001,
+                                    "type": "number",
+                                    "description": "The numerical value of the Quantity.\nMust be in the range of -9,000,000,000,000 to 9,000,000,000,000 and may use up to 6 decimal digits.\n"
+                                },
+                                "unit": {
+                                    "type": "string",
+                                    "description": "Describes a unit of measure. Commonly uses as part of Quantity values.\n",
+                                    "enum": [
+                                        "ENERGY_JOULES",
+                                        "ENERGY_GIGAJOULES",
+                                        "ENERGY_MEGAJOULES",
+                                        "ENERGY_KILOJOULES",
+                                        "ENERGY_CENTIJOULES",
+                                        "ENERGY_MILLIJOULES",
+                                        "ENERGY_MICROJOULES",
+                                        "ENERGY_CALORIES",
+                                        "ENERGY_KILOCALORIES",
+                                        "ENERGY_WATTHOURS",
+                                        "ENERGY_GIGAWATTHOURS",
+                                        "ENERGY_MEGAWATTHOURS",
+                                        "ENERGY_KILOWATTHOURS",
+                                        "ENERGY_CENTIWATTHOURS",
+                                        "ENERGY_MILLIWATTHOURS",
+                                        "ENERGY_MICROWATTHOURS",
+                                        "LENGTH_KILOMETERS",
+                                        "LENGTH_METERS",
+                                        "LENGTH_DECIMETERS",
+                                        "LENGTH_CENTIMETERS",
+                                        "LENGTH_MILLIMETERS",
+                                        "LENGTH_POINTS",
+                                        "LENGTH_INCHES",
+                                        "LENGTH_FEET",
+                                        "LENGTH_YARDS",
+                                        "MASS_TONS",
+                                        "MASS_KILOGRAMS",
+                                        "MASS_GRAMS",
+                                        "MASS_MILLIGRAMS",
+                                        "MASS_POUNDS",
+                                        "QUANTITY_PIECES",
+                                        "TIME_SECONDS",
+                                        "TIME_MINUTES",
+                                        "TIME_HOURS",
+                                        "TIME_DAYS",
+                                        "TIME_WEEKS",
+                                        "DIGITALINFORMATION_BYTES",
+                                        "DIGITALINFORMATION_KILOBYTES",
+                                        "DIGITALINFORMATION_KIBIBYTES",
+                                        "DIGITALINFORMATION_MEGABYTES",
+                                        "DIGITALINFORMATION_MEBIBYTES",
+                                        "DIGITALINFORMATION_GIGABYTES",
+                                        "DIGITALINFORMATION_GIBIBYTES",
+                                        "DIGITALINFORMATION_TERABYTES",
+                                        "DIGITALINFORMATION_TEBIBYTES",
+                                        "DIGITALINFORMATION_PETABYTES",
+                                        "DIGITALINFORMATION_PEBIBYTES",
+                                        "TIME_MONTHS",
+                                        "TIME_YEARS",
+                                        "VOLUME_CUBIC_MILLIMETERS",
+                                        "VOLUME_CUBIC_CENTIMETERS",
+                                        "VOLUME_CUBIC_DECIMETERS",
+                                        "VOLUME_CUBIC_METERS",
+                                        "VOLUME_MILLILITERS",
+                                        "VOLUME_CENTILITERS",
+                                        "VOLUME_DECILITERS",
+                                        "VOLUME_LITERS",
+                                        "VOLUME_HECTOLITERS",
+                                        "VOLUME_FLUID_OUNCES",
+                                        "VOLUME_PINTS",
+                                        "VOLUME_QUARTS",
+                                        "VOLUME_GALLONS",
+                                        "VOLUME_BARRELS"
+                                    ]
+                                }
+                            },
+                            "description": "A Quantity represents a quantity value (i.e., a unit and an amount), for example \"3 pcs\" or \"2.5 kg\"."
+                        }
+                    },
+                    "description": "The set of information defining the price of a product.\nA product's price is always relative to a specific quantity of the product.\nFor example, if a single bottle of water costs 1�, 5 bottles cost 5�.\nAdditionally, a given price might be including tax or not.\nTherefore, the ProductPriceAndQuantity is a combination of a quantity, a price and a \"price is gross\"-flag.\n"
+                },
+                "block_sales": {
+                    "type": "boolean",
+                    "description": "Whether sales of the product are allowed on the sales channel. When not specified, the product's configuration is used instead.\n"
+                },
+                "exclude_from_discounts": {
+                    "type": "boolean",
+                    "description": "Whether discounts may be applied when the product is sold on the sales channel. When not specified, the product's configuration is used instead.\n"
+                }
+            },
+            "description": "Information about the product for a specific sales channel.\nSales channels represent a place where the products can be sold.\nEach ProductSalesChannelInformation holds the information relevant for the sale of the product on a specific channel.\nWhen no ProductSalesChannelInformation exists for a specfic product and channel, that product cannot be sold via that channel.\n"
+        },
+        "org_id": {
+            "required": true,
+            "type": "string"
+        },
+        "product_id": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

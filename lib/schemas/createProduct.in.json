@@ -1,0 +1,384 @@
+{
+    "type": "object",
+    "properties": {
+        "requestBody": {
+            "required": [
+                "id",
+                "management_unit",
+                "name",
+                "tax_category"
+            ],
+            "type": "object",
+            "properties": {
+                "id": {
+                    "maxLength": 256,
+                    "type": "string",
+                    "description": "The technical identifier of the product. Assigned by the enfore platform on creation of the\nproduct and not changeable afterwards.\n",
+                    "readOnly": true
+                },
+                "name": {
+                    "maxLength": 256,
+                    "type": "string",
+                    "description": "The name of the product."
+                },
+                "external_id": {
+                    "maxLength": 256,
+                    "type": "string",
+                    "description": "An identifier for use by the external system.\nCan also be used to address the product via the \"/products/external-id/{external-id}\" resource.\n"
+                },
+                "article_id": {
+                    "maxLength": 256,
+                    "type": "string",
+                    "description": "The identifier by which the article is addressed by the business when communicating internally\nor with customers or suppliers.\n\nOnce specified, the article ID cannot be modified anymore. Otherwise, business documents such\nas invoices or packaging lists created at different points in time may list the same article\nID for different products.\n"
+                },
+                "escrow_supplier": {
+                    "maxLength": 256,
+                    "type": "string",
+                    "description": "An identifier for use in case the supplied product is an escrow item.\nIf not present, the product is assumed to be a regular product without any escrow properties.\n"
+                },
+                "management_unit": {
+                    "type": "string",
+                    "description": "Describes a unit of measure. Commonly uses as part of Quantity values.\n",
+                    "enum": [
+                        "ENERGY_JOULES",
+                        "ENERGY_GIGAJOULES",
+                        "ENERGY_MEGAJOULES",
+                        "ENERGY_KILOJOULES",
+                        "ENERGY_CENTIJOULES",
+                        "ENERGY_MILLIJOULES",
+                        "ENERGY_MICROJOULES",
+                        "ENERGY_CALORIES",
+                        "ENERGY_KILOCALORIES",
+                        "ENERGY_WATTHOURS",
+                        "ENERGY_GIGAWATTHOURS",
+                        "ENERGY_MEGAWATTHOURS",
+                        "ENERGY_KILOWATTHOURS",
+                        "ENERGY_CENTIWATTHOURS",
+                        "ENERGY_MILLIWATTHOURS",
+                        "ENERGY_MICROWATTHOURS",
+                        "LENGTH_KILOMETERS",
+                        "LENGTH_METERS",
+                        "LENGTH_DECIMETERS",
+                        "LENGTH_CENTIMETERS",
+                        "LENGTH_MILLIMETERS",
+                        "LENGTH_POINTS",
+                        "LENGTH_INCHES",
+                        "LENGTH_FEET",
+                        "LENGTH_YARDS",
+                        "MASS_TONS",
+                        "MASS_KILOGRAMS",
+                        "MASS_GRAMS",
+                        "MASS_MILLIGRAMS",
+                        "MASS_POUNDS",
+                        "QUANTITY_PIECES",
+                        "TIME_SECONDS",
+                        "TIME_MINUTES",
+                        "TIME_HOURS",
+                        "TIME_DAYS",
+                        "TIME_WEEKS",
+                        "DIGITALINFORMATION_BYTES",
+                        "DIGITALINFORMATION_KILOBYTES",
+                        "DIGITALINFORMATION_KIBIBYTES",
+                        "DIGITALINFORMATION_MEGABYTES",
+                        "DIGITALINFORMATION_MEBIBYTES",
+                        "DIGITALINFORMATION_GIGABYTES",
+                        "DIGITALINFORMATION_GIBIBYTES",
+                        "DIGITALINFORMATION_TERABYTES",
+                        "DIGITALINFORMATION_TEBIBYTES",
+                        "DIGITALINFORMATION_PETABYTES",
+                        "DIGITALINFORMATION_PEBIBYTES",
+                        "TIME_MONTHS",
+                        "TIME_YEARS",
+                        "VOLUME_CUBIC_MILLIMETERS",
+                        "VOLUME_CUBIC_CENTIMETERS",
+                        "VOLUME_CUBIC_DECIMETERS",
+                        "VOLUME_CUBIC_METERS",
+                        "VOLUME_MILLILITERS",
+                        "VOLUME_CENTILITERS",
+                        "VOLUME_DECILITERS",
+                        "VOLUME_LITERS",
+                        "VOLUME_HECTOLITERS",
+                        "VOLUME_FLUID_OUNCES",
+                        "VOLUME_PINTS",
+                        "VOLUME_QUARTS",
+                        "VOLUME_GALLONS",
+                        "VOLUME_BARRELS"
+                    ]
+                },
+                "sales_price_and_quantity": {
+                    "required": [
+                        "price",
+                        "price_is_gross",
+                        "quantity"
+                    ],
+                    "type": "object",
+                    "properties": {
+                        "price": {
+                            "required": [
+                                "unit",
+                                "value"
+                            ],
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "multipleOf": 0.000001,
+                                    "type": "number",
+                                    "description": "The numerical value of the Money.\nMust be in the range of -9,000,000,000,000 to 9,000,000,000,000 and may use up to 6 decimal digits.\n"
+                                },
+                                "unit": {
+                                    "type": "string",
+                                    "description": "Represents a currency. Uses the ISO 4217 codes.",
+                                    "enum": [
+                                        "AUD",
+                                        "BRL",
+                                        "CAD",
+                                        "CHF",
+                                        "CNY",
+                                        "DKK",
+                                        "EUR",
+                                        "GBP",
+                                        "HKD",
+                                        "IDR",
+                                        "INR",
+                                        "JPY",
+                                        "KRW",
+                                        "MXN",
+                                        "MYR",
+                                        "NOK",
+                                        "NZD",
+                                        "PHP",
+                                        "RUB",
+                                        "SEK",
+                                        "SGD",
+                                        "TRY",
+                                        "TWD",
+                                        "USD",
+                                        "ZAR"
+                                    ]
+                                }
+                            },
+                            "description": "A Money represents a monetary value (i.e., a currency and an amount), for example \"120 EUR\" or \"2,500.75 USD\"."
+                        },
+                        "price_is_gross": {
+                            "type": "boolean",
+                            "description": "Flag indicating whether the price is gross (true) or net (false)"
+                        },
+                        "quantity": {
+                            "required": [
+                                "unit",
+                                "value"
+                            ],
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "multipleOf": 0.000001,
+                                    "type": "number",
+                                    "description": "The numerical value of the Quantity.\nMust be in the range of -9,000,000,000,000 to 9,000,000,000,000 and may use up to 6 decimal digits.\n"
+                                },
+                                "unit": {
+                                    "type": "string",
+                                    "description": "Describes a unit of measure. Commonly uses as part of Quantity values.\n",
+                                    "enum": [
+                                        "ENERGY_JOULES",
+                                        "ENERGY_GIGAJOULES",
+                                        "ENERGY_MEGAJOULES",
+                                        "ENERGY_KILOJOULES",
+                                        "ENERGY_CENTIJOULES",
+                                        "ENERGY_MILLIJOULES",
+                                        "ENERGY_MICROJOULES",
+                                        "ENERGY_CALORIES",
+                                        "ENERGY_KILOCALORIES",
+                                        "ENERGY_WATTHOURS",
+                                        "ENERGY_GIGAWATTHOURS",
+                                        "ENERGY_MEGAWATTHOURS",
+                                        "ENERGY_KILOWATTHOURS",
+                                        "ENERGY_CENTIWATTHOURS",
+                                        "ENERGY_MILLIWATTHOURS",
+                                        "ENERGY_MICROWATTHOURS",
+                                        "LENGTH_KILOMETERS",
+                                        "LENGTH_METERS",
+                                        "LENGTH_DECIMETERS",
+                                        "LENGTH_CENTIMETERS",
+                                        "LENGTH_MILLIMETERS",
+                                        "LENGTH_POINTS",
+                                        "LENGTH_INCHES",
+                                        "LENGTH_FEET",
+                                        "LENGTH_YARDS",
+                                        "MASS_TONS",
+                                        "MASS_KILOGRAMS",
+                                        "MASS_GRAMS",
+                                        "MASS_MILLIGRAMS",
+                                        "MASS_POUNDS",
+                                        "QUANTITY_PIECES",
+                                        "TIME_SECONDS",
+                                        "TIME_MINUTES",
+                                        "TIME_HOURS",
+                                        "TIME_DAYS",
+                                        "TIME_WEEKS",
+                                        "DIGITALINFORMATION_BYTES",
+                                        "DIGITALINFORMATION_KILOBYTES",
+                                        "DIGITALINFORMATION_KIBIBYTES",
+                                        "DIGITALINFORMATION_MEGABYTES",
+                                        "DIGITALINFORMATION_MEBIBYTES",
+                                        "DIGITALINFORMATION_GIGABYTES",
+                                        "DIGITALINFORMATION_GIBIBYTES",
+                                        "DIGITALINFORMATION_TERABYTES",
+                                        "DIGITALINFORMATION_TEBIBYTES",
+                                        "DIGITALINFORMATION_PETABYTES",
+                                        "DIGITALINFORMATION_PEBIBYTES",
+                                        "TIME_MONTHS",
+                                        "TIME_YEARS",
+                                        "VOLUME_CUBIC_MILLIMETERS",
+                                        "VOLUME_CUBIC_CENTIMETERS",
+                                        "VOLUME_CUBIC_DECIMETERS",
+                                        "VOLUME_CUBIC_METERS",
+                                        "VOLUME_MILLILITERS",
+                                        "VOLUME_CENTILITERS",
+                                        "VOLUME_DECILITERS",
+                                        "VOLUME_LITERS",
+                                        "VOLUME_HECTOLITERS",
+                                        "VOLUME_FLUID_OUNCES",
+                                        "VOLUME_PINTS",
+                                        "VOLUME_QUARTS",
+                                        "VOLUME_GALLONS",
+                                        "VOLUME_BARRELS"
+                                    ]
+                                }
+                            },
+                            "description": "A Quantity represents a quantity value (i.e., a unit and an amount), for example \"3 pcs\" or \"2.5 kg\"."
+                        }
+                    },
+                    "description": "The set of information defining the price of a product.\nA product's price is always relative to a specific quantity of the product.\nFor example, if a single bottle of water costs 1�, 5 bottles cost 5�.\nAdditionally, a given price might be including tax or not.\nTherefore, the ProductPriceAndQuantity is a combination of a quantity, a price and a \"price is gross\"-flag.\n"
+                },
+                "block_sales": {
+                    "type": "boolean",
+                    "description": "If this optional flag is set to true, selling of the product is blocked."
+                },
+                "exclude_from_discounts": {
+                    "type": "boolean",
+                    "description": "If this optional flag is set to true, discounts are not applied to this product."
+                },
+                "product_identifiers": {
+                    "type": "array",
+                    "description": "Additional identifiers such as GTIN or ASIN assigned to the product.\nNote that it is possible to have multiple identifiers of the same type.\n",
+                    "items": {
+                        "required": [
+                            "type",
+                            "value"
+                        ],
+                        "type": "object",
+                        "properties": {
+                            "type": {
+                                "type": "string",
+                                "description": "* `ASIN` - Amazon Standard Identification Number (ASIN) - is a 10-character alphanumeric unique identifier assigned by Amazon.com.\n* `EAN` - EAN barcode (originally European Article Number) - is a 13 digit (12 data and 1 check) barcoding standard.\n* `FNSKU` - Amazon Fulfillment Network SKU - is the unique identifier for each inventory item stored in one of Amazon's fulfillment centers\n* `GCID` - Global Catalog Identifier - is number generated by the system automatically after your brand is registered in Amazon.com brand registry\n* `GTIN` - Global Trade Item Number - is a globally unique 14-digit number used to identify trade items, products, or services.\n* `ISBN` - International Standard Book Number (ISBN) - is a 13-digit number assigned by standard book numbering agencies to control and facilitate activities within the publishing industry.\n* `JAN` - Japanese Article Number - is a barcode standard compatible with the International Article Number scheme.\n* `UPC` - Universal Product Code (UPC) - is a barcode symbology (i.e., a specific type of barcode) that is widely used in the United States, Canada, the United Kingdom, Australia, New Zealand, and in other countries for tracking trade items in stores.\n",
+                                "enum": [
+                                    "ASIN",
+                                    "EAN",
+                                    "FNSKU",
+                                    "GCID",
+                                    "GTIN",
+                                    "ISBN",
+                                    "JAN",
+                                    "UPC"
+                                ]
+                            },
+                            "value": {
+                                "type": "string",
+                                "description": "The value of the identifier.\nNote that the type imposes constraints on the value, for example a GTIN is between 8 and 14 characters long.\n"
+                            }
+                        },
+                        "description": "An identifier for a product. Consists of type and value."
+                    }
+                },
+                "tax_category": {
+                    "type": "string",
+                    "description": "Represents the locale-independent representation of a specific type of tax.\n\nThe category does not represent a specifix tax. This is needed as taxes are a) different depending\non country (and sometimes even within a single country) and b) tax rates may change over time but\nthe actual Tax objects must not change as they are referenced by existing invoices.\n\nFor example, the tax category STANDARD is mapped to currently mapped to \"DE/19%\" for Germany and to \"UK/20%\"\nfor the UK. If Germany would increase the standard tax rate to 21%, the mapping for Germany would be updated,\nbut the products would still use the same STANDARD category as before.\n\nAdditional factors may also influcence the mapping, for example the category REDUCED_TAKE_AWAY normally gets\nmapped to \"DE/19%\" for Germany. But when the sale is flagged as \"to go\", the category is mapped to \"DE/7%\"\ninstead.\n",
+                    "enum": [
+                        "STANDARD",
+                        "REDUCED",
+                        "REDUCED_TAKE_AWAY",
+                        "NO_TAX"
+                    ]
+                },
+                "tax_exemption_reason": {
+                    "type": "string",
+                    "description": "Reasons for not applying tax on a product sale.",
+                    "enum": [
+                        "UNIVERSAL_POSTAL_SERVICE_DE",
+                        "INTRA_COMMUNITY_TRADE_EU",
+                        "THIRD_PARTY_COUNTRY_DELIVERY_EU",
+                        "REVERSE_CHARGE_EU"
+                    ]
+                },
+                "custom_workflow_config": {
+                    "required": [
+                        "provider_id"
+                    ],
+                    "type": "object",
+                    "properties": {
+                        "provider_id": {
+                            "maxLength": 256,
+                            "type": "string",
+                            "description": "The identifier of the provider for the custom workflows related\nto the product.\n"
+                        },
+                        "configure_lineitem_start_url": {
+                            "type": "string",
+                            "description": "The start URL for the \"configure line item\" workflow. When\nset, the custom workflow will be invoked every time the\nproduct is selected in the register grid (or scanned, or\nadded via search) instead of the regular N4 handling for\ncreation of the line item.\n",
+                            "format": "uri"
+                        },
+                        "assemble_product_start_url": {
+                            "type": "string",
+                            "description": "The start URL for the \"assemble product\" workflow. When\nset, the custom workflow will be invoked as part of order\nprocessing every time a line item with the product is\nfully paid. This then replaces the regular N4 handling\nfor assembling products.\n",
+                            "format": "uri"
+                        },
+                        "cancel_lineitem_start_url": {
+                            "type": "string",
+                            "description": "The start URL for the \"cancel line item\" workflow. When\nset, the custom workflow will be invoked every time an\nunpaid line item with the product is removed from an order.\nThis replaces the regular N4 UI for selection of the\ncancelation reason.\n\nNOTE: This also assumes the item will always be canceled\nin full. I.e., no partial cancel operations.\n",
+                            "format": "uri"
+                        },
+                        "refund_lineitem_start_url": {
+                            "type": "string",
+                            "description": "The start URL for the \"refund line item\" workflow. When\nset, the custom workflow will be invoked every time a\npaid line item with the product is removed from an order.\nThis replaces the regular N4 UI for selection of the\ncancelation reason.\n\nNOTE: This currently assumes that items will always simply\nbe refunded. No \"repair\", \"replace\", or \"return\" handling\nis supported for items with such a workflow.\n\nNOTE: This also assumes the item will always be refunded\nin full. I.e., no partial refunds.\n",
+                            "format": "uri"
+                        }
+                    },
+                    "description": "Holds information about the custom workflows defined for a\nproduct and the line items of orders/invoices that reference\nthe product.\n"
+                },
+                "sales_category": {
+                    "maxLength": 256,
+                    "type": "string",
+                    "description": "The ID of the sales category that the product belongs to.\n"
+                },
+                "track_inventory": {
+                    "type": "boolean",
+                    "description": "Flag that specifies if inventory (per storage location) is tracked for the product.",
+                    "default": false
+                },
+                "manufacturer": {
+                    "maxLength": 256,
+                    "type": "string",
+                    "description": "The name of the manufacturer of the product."
+                },
+                "lot_configuration": {
+                    "required": [
+                        "require_lot_for_sales_fulfillment"
+                    ],
+                    "type": "object",
+                    "properties": {
+                        "require_lot_for_sales_fulfillment": {
+                            "type": "boolean",
+                            "description": "Flag indicating whether a lot must be specified when a sales is fulfilled.\n\nWhen TRUE, a lot must be specified in the register (for OTC sales) or during\npickup/delivery fulfillment.\n",
+                            "default": false
+                        }
+                    },
+                    "description": "Defines that the product uses lots and provides the settings on how\nlots are used.\n"
+                }
+            },
+            "description": "Represents a product that is sold by the business.\n"
+        },
+        "org_id": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

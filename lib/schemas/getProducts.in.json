@@ -1,0 +1,20 @@
+{
+    "type": "object",
+    "properties": {
+        "limit": {
+            "maximum": 5000,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int64"
+        },
+        "offset": {
+            "minimum": 0,
+            "type": "integer",
+            "format": "int64"
+        },
+        "org_id": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}
